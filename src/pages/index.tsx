@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     setTextValue(previousValue => previousValue.split('').reverse().join(''))
   }, [])
 
-  const handleSentece = useCallback(() => {
+  const handleSentence = useCallback(() => {
     setTextValue(
       previousValue =>
         previousValue.charAt(0).toLocaleUpperCase() + previousValue.slice(1)
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
       upperCase: handleUpperCase,
       lowerCase: handleLowerCase,
       reverse: handleReverse,
-      sentece: handleSentece,
+      sentence: handleSentence,
       capitalize: handleCapitalize,
       download: handleDownload
     }),
