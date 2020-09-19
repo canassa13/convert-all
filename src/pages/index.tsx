@@ -7,8 +7,10 @@ import {
   RadioGroup,
   Radio,
   Box,
-  Button
+  Button,
+  Text
 } from '@chakra-ui/core'
+import { AiFillHeart as HeartIcon } from 'react-icons/ai'
 
 const Home: React.FC = () => {
   const [textValue, setTextValue] = useState('')
@@ -77,18 +79,19 @@ const Home: React.FC = () => {
   )
 
   return (
-    <Box height="100vh" p={2}>
+    <Box as="main" height="100vh" p={2}>
       <Grid
-        as="main"
         templateColumns="1fr 800px 1fr"
         templateRows="1fr 1fr 1fr"
         templateAreas="
         '. . .'
         '. text .'
-        '. button .'
+        '. . footer'
         "
         justifyContent="center"
         alignItems="center"
+        height="100%"
+        width="100%"
       >
         <Flex gridArea="text" alignItems="center" flexDirection="column">
           <RadioGroup
@@ -96,7 +99,6 @@ const Home: React.FC = () => {
             isInline
             spacing={5}
             onChange={handleResizeChange}
-            mb={6}
           >
             <Radio value="upperCase">Upper Case</Radio>
             <Radio value="lowerCase">Lower Case</Radio>
@@ -105,19 +107,31 @@ const Home: React.FC = () => {
             <Radio value="capitalize">Capitalize</Radio>
           </RadioGroup>
           <Textarea
+            margin={3}
             value={textValue}
             onChange={handleInputChange}
             placeholder="Start typing..."
-            size="lg"
           />
+          <Flex width="100%" justifyContent="flex-end">
+            <Button variantColor="purple" onClick={() => handleDownload()}>
+              Download Text
+            </Button>
+          </Flex>
         </Flex>
-        <Button
-          gridArea="button"
-          variantColor="purple"
-          onClick={() => handleDownload()}
+        <Flex
+          height="100%"
+          gridArea="footer"
+          alignItems="flex-end"
+          justifyContent="flex-end"
         >
-          Download Text
-        </Button>
+          <Box d="flex" alignItems="center">
+            <Text>Made with </Text>
+            <HeartIcon size={32} color="red" />
+            <Text whiteSpace="nowrap">
+              by <b>Pedro</b>
+            </Text>
+          </Box>
+        </Flex>
       </Grid>
     </Box>
   )
