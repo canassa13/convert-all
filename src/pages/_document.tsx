@@ -1,10 +1,5 @@
 import React from 'react'
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-} from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
   render(): JSX.Element {
@@ -18,7 +13,7 @@ class MyDocument extends Document {
           ></link>
         </Head>
         <body>
-   <Main />
+          <Main />
           <NextScript />
         </body>
       </Html>
