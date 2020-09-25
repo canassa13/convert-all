@@ -1,22 +1,28 @@
-import React, { memo, useState, useCallback, ChangeEvent, useMemo } from 'react'
+import React, {
+  memo,
+  useState,
+  useCallback,
+  ChangeEvent,
+  useMemo,
+  ReactText
+} from 'react'
 import { saveAs } from 'file-saver'
 import {
-  Grid,
-  Flex,
   Textarea,
   RadioGroup,
   Radio,
-  Box,
+  Flex,
   Button,
-  Text
+  Stack,
+  useColorMode
 } from '@chakra-ui/core'
-import { AiFillHeart as HeartIcon } from 'react-icons/ai'
 
 const Home: React.FC = () => {
   const [textValue, setTextValue] = useState('')
+  const { colorMode, toggleColorMode } = useColorMode()
 
   const handleInputChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLTextAreaElement>) => {
       setTextValue(event.target.value)
     },
     []
@@ -68,8 +74,7 @@ const Home: React.FC = () => {
   )
 
   const handleResizeChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target
+    (value: ReactText) => {
       const callFunction = handlers[value]
       if (callFunction) {
         callFunction()
@@ -79,61 +84,45 @@ const Home: React.FC = () => {
   )
 
   return (
-    <Box as="main" height="100vh" p={2}>
-      <Grid
-        templateColumns="1fr 800px 1fr"
-        templateRows="1fr 1fr 1fr"
-        templateAreas="
-        '. . .'
-        '. text .'
-        '. . footer'
-        "
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-        width="100%"
-      >
-        <Flex gridArea="text" alignItems="center" flexDirection="column">
-          <RadioGroup
-            variantColor="purple"
-            isInline
-            spacing={5}
-            onChange={handleResizeChange}
-          >
-            <Radio value="upperCase">Upper Case</Radio>
-            <Radio value="lowerCase">Lower Case</Radio>
-            <Radio value="reverse">Reverse</Radio>
-            <Radio value="sentence">Sentence</Radio>
-            <Radio value="capitalize">Capitalize</Radio>
-          </RadioGroup>
+    <Flex h="100vh" maxW="1280px" p={3} flexDirection="column">
+      <Flex as="header" w="full" justifyContent="flex-end">
+        <Button onClick={toggleColorMode}>
+          Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+        </Button>
+      </Flex>
+      <Flex as="main" alignItems="center" justifyContent="center" flex="1">
+        <Flex w="80%" flexDirection="column">
+          <Flex justifyContent="flex-end" pb={3}>
+            <Button
+              colorScheme="purple"
+              onClick={() => handleDownload()}
+              isDisabled={textValue.length === 0}
+            >
+              Download Text
+            </Button>
+          </Flex>
           <Textarea
-            margin={3}
             value={textValue}
             onChange={handleInputChange}
             placeholder="Start typing..."
           />
-          <Flex width="100%" justifyContent="flex-end">
-            <Button variantColor="purple" onClick={() => handleDownload()}>
-              Download Text
-            </Button>
-          </Flex>
+          <RadioGroup pt={3} colorScheme="purple" onChange={handleResizeChange}>
+            <Stack
+              spacing={0}
+              direction="row"
+              flexWrap="wrap"
+              justify="space-between"
+            >
+              <Radio value="upperCase">Upper Case</Radio>
+              <Radio value="lowerCase">Lower Case</Radio>
+              <Radio value="reverse">Reverse</Radio>
+              <Radio value="sentence">Sentence</Radio>
+              <Radio value="capitalize">Capitalize</Radio>
+            </Stack>
+          </RadioGroup>
         </Flex>
-        <Flex
-          height="100%"
-          gridArea="footer"
-          alignItems="flex-end"
-          justifyContent="flex-end"
-        >
-          <Box d="flex" alignItems="center">
-            <Text>Made with </Text>
-            <HeartIcon size={32} color="red" />
-            <Text whiteSpace="nowrap">
-              by <b>Pedro</b>
-            </Text>
-          </Box>
-        </Flex>
-      </Grid>
-    </Box>
+      </Flex>
+    </Flex>
   )
 }
 

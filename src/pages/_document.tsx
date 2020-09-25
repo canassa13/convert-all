@@ -4,9 +4,20 @@ import Document, {
   Head,
   Main,
   NextScript,
+  DocumentContext,
+  DocumentInitialProps
 } from 'next/document'
+import { ColorModeScript } from '@chakra-ui/core'
 
 class MyDocument extends Document {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
+    const initialProps = await Document.getInitialProps(ctx)
+
+    return initialProps
+  }
+
   render(): JSX.Element {
     return (
       <Html lang="pt">
@@ -18,7 +29,8 @@ class MyDocument extends Document {
           ></link>
         </Head>
         <body>
-   <Main />
+          <ColorModeScript defaultColorMode="light" />
+          <Main />
           <NextScript />
         </body>
       </Html>
