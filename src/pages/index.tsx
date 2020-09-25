@@ -13,11 +13,13 @@ import {
   Radio,
   Flex,
   Button,
-  Stack
+  Stack,
+  useColorMode
 } from '@chakra-ui/core'
 
 const Home: React.FC = () => {
   const [textValue, setTextValue] = useState('')
+  const { colorMode, toggleColorMode } = useColorMode()
 
   const handleInputChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -82,13 +84,13 @@ const Home: React.FC = () => {
   )
 
   return (
-    <Flex h="100vh" maxW="1280px" as="main" p={3}>
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        flexDirection="column"
-        flex="1"
-      >
+    <Flex h="100vh" maxW="1280px" p={3} flexDirection="column">
+      <Flex as="header" w="full" justifyContent="flex-end">
+        <Button onClick={toggleColorMode}>
+          Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+        </Button>
+      </Flex>
+      <Flex as="main" alignItems="center" justifyContent="center" flex="1">
         <Flex w="80%" flexDirection="column">
           <Flex justifyContent="flex-end" pb={3}>
             <Button colorScheme="purple" onClick={() => handleDownload()}>
