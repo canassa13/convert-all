@@ -93,7 +93,11 @@ const Home: React.FC = () => {
       <Flex as="main" alignItems="center" justifyContent="center" flex="1">
         <Flex w="80%" flexDirection="column">
           <Flex justifyContent="flex-end" pb={3}>
-            <Button colorScheme="purple" onClick={() => handleDownload()}>
+            <Button
+              colorScheme="purple"
+              onClick={() => handleDownload()}
+              isDisabled={textValue.length === 0}
+            >
               Download Text
             </Button>
           </Flex>
