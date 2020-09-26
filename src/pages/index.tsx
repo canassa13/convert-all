@@ -16,6 +16,7 @@ import {
   Stack,
   useColorMode
 } from '@chakra-ui/core'
+import Header from '../components/Header'
 
 const Home: React.FC = () => {
   const [textValue, setTextValue] = useState('')
@@ -84,45 +85,52 @@ const Home: React.FC = () => {
   )
 
   return (
-    <Flex h="100vh" maxW="1280px" p={3} flexDirection="column">
-      <Flex as="header" w="full" justifyContent="flex-end">
-        <Button onClick={toggleColorMode}>
-          Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-        </Button>
-      </Flex>
-      <Flex as="main" alignItems="center" justifyContent="center" flex="1">
-        <Flex w="80%" flexDirection="column">
-          <Flex justifyContent="flex-end" pb={3}>
-            <Button
+    <>
+      <Header>Teste</Header>
+      <Flex flex="1" maxW="1280px" p={3} flexDirection="column">
+        <Flex w="full" justifyContent="flex-end">
+          <Button onClick={toggleColorMode}>
+            Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+          </Button>
+        </Flex>
+        <Flex as="main" alignItems="center" justifyContent="center" flex="1">
+          <Flex w="80%" flexDirection="column">
+            <Flex justifyContent="flex-end" pb={3}>
+              <Button
+                colorScheme="purple"
+                onClick={() => handleDownload()}
+                isDisabled={textValue.length === 0}
+              >
+                Download Text
+              </Button>
+            </Flex>
+            <Textarea
+              value={textValue}
+              onChange={handleInputChange}
+              placeholder="Start typing..."
+            />
+            <RadioGroup
+              pt={3}
               colorScheme="purple"
-              onClick={() => handleDownload()}
-              isDisabled={textValue.length === 0}
+              onChange={handleResizeChange}
             >
-              Download Text
-            </Button>
+              <Stack
+                spacing={0}
+                direction="row"
+                flexWrap="wrap"
+                justify="space-between"
+              >
+                <Radio value="upperCase">Upper Case</Radio>
+                <Radio value="lowerCase">Lower Case</Radio>
+                <Radio value="reverse">Reverse</Radio>
+                <Radio value="sentence">Sentence</Radio>
+                <Radio value="capitalize">Capitalize</Radio>
+              </Stack>
+            </RadioGroup>
           </Flex>
-          <Textarea
-            value={textValue}
-            onChange={handleInputChange}
-            placeholder="Start typing..."
-          />
-          <RadioGroup pt={3} colorScheme="purple" onChange={handleResizeChange}>
-            <Stack
-              spacing={0}
-              direction="row"
-              flexWrap="wrap"
-              justify="space-between"
-            >
-              <Radio value="upperCase">Upper Case</Radio>
-              <Radio value="lowerCase">Lower Case</Radio>
-              <Radio value="reverse">Reverse</Radio>
-              <Radio value="sentence">Sentence</Radio>
-              <Radio value="capitalize">Capitalize</Radio>
-            </Stack>
-          </RadioGroup>
         </Flex>
       </Flex>
-    </Flex>
+    </>
   )
 }
 
