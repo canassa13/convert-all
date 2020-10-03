@@ -1,6 +1,8 @@
 import { Flex, Heading, Box, Text } from '@chakra-ui/core'
 import React from 'react'
 import { FiMenu } from 'react-icons/fi'
+import Link from 'next/link'
+
 const Header: React.FC = props => {
   const [show, setShow] = React.useState(false)
   const handleToggle = () => setShow(!show)
@@ -33,12 +35,14 @@ const Header: React.FC = props => {
     >
       <Flex align="center">
         <Heading as="h1" size="lg" color="gray.200">
-          Convert All
+          <Link href="/">
+            <a>Convert All</a>
+          </Link>
         </Heading>
       </Flex>
 
       <Box
-        display={{ sm: 'flex', md: 'none' }}
+        display={{ xs: 'flex', md: 'none' }}
         onClick={handleToggle}
         alignItems="center"
         justifyContent="center"
@@ -51,22 +55,28 @@ const Header: React.FC = props => {
       </Box>
 
       <Box
-        display={{ sm: 'none', md: 'flex' }}
+        display={{ xs: 'none', md: 'flex' }}
         alignItems="center"
         justifyContent="center"
         flexGrow={1}
       >
-        <MenuItems>Text</MenuItems>
-        <MenuItems>Examples</MenuItems>
-        <MenuItems>
-          <a
-            href="https://canassa.netlify.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Blog
+        <Link href="/">
+          <a>
+            <MenuItems>Text</MenuItems>
           </a>
-        </MenuItems>
+        </Link>
+        <Link href="/examples">
+          <a>
+            <MenuItems>Examples</MenuItems>
+          </a>
+        </Link>
+        <a
+          href="https://canassa.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MenuItems>Blog</MenuItems>
+        </a>
       </Box>
     </Flex>
   )

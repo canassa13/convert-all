@@ -113,6 +113,7 @@ const Home: React.FC = () => {
           >
             <Flex justifyContent="flex-end" pb={3}>
               <Button
+                width={{ xs: '100%', sm: 'auto' }}
                 colorScheme="purple"
                 onClick={() => handleDownload()}
                 isDisabled={textValue.length === 0}
@@ -132,7 +133,7 @@ const Home: React.FC = () => {
             >
               <Stack
                 spacing={0}
-                direction="row"
+                direction={{ xs: 'column', md: 'row' }}
                 flexWrap="wrap"
                 justify="space-between"
                 color="gray.200"
