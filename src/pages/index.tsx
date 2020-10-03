@@ -107,13 +107,13 @@ const Home: React.FC = () => {
             flexDirection="column"
             bg="gray.800"
             borderRadius={5}
-            h={'500px'}
+            h={{ xs: '400px', md: '500px' }}
             paddingX={8}
             justify="center"
           >
             <Flex justifyContent="flex-end" pb={3}>
               <Button
-                width={{ xs: '100%', sm: 'auto' }}
+                width={{ xs: '100%', md: 'auto' }}
                 colorScheme="purple"
                 onClick={() => handleDownload()}
                 isDisabled={textValue.length === 0}
