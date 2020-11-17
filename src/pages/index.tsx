@@ -13,14 +13,12 @@ import {
   Radio,
   Flex,
   Button,
-  Stack,
-  useColorMode
+  Stack
 } from '@chakra-ui/core'
 import Header from '../components/Header'
 
 const Home: React.FC = () => {
   const [textValue, setTextValue] = useState('')
-  const { colorMode, toggleColorMode } = useColorMode()
 
   const handleInputChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -86,17 +84,36 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Header>Teste</Header>
-      <Flex flex="1" maxW="1280px" p={3} flexDirection="column">
-        <Flex w="full" justifyContent="flex-end">
-          <Button onClick={toggleColorMode}>
-            Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-          </Button>
-        </Flex>
-        <Flex as="main" alignItems="center" justifyContent="center" flex="1">
-          <Flex w="80%" flexDirection="column">
+      <Header />
+      <Flex
+        flex="1"
+        p={3}
+        flexDirection="column"
+        h="calc(100vh - 80px)"
+        bg="gray.900"
+        align="center"
+      >
+        <Flex
+          as="main"
+          w={'80%'}
+          maxW="1280px"
+          align="center"
+          justify="center"
+          flex={1}
+        >
+          <Flex
+            maxW="1000px"
+            flex={1}
+            flexDirection="column"
+            bg="gray.800"
+            borderRadius={5}
+            h={{ xs: '400px', md: '500px' }}
+            paddingX={8}
+            justify="center"
+          >
             <Flex justifyContent="flex-end" pb={3}>
               <Button
+                width={{ xs: '100%', md: 'auto' }}
                 colorScheme="purple"
                 onClick={() => handleDownload()}
                 isDisabled={textValue.length === 0}
@@ -116,9 +133,10 @@ const Home: React.FC = () => {
             >
               <Stack
                 spacing={0}
-                direction="row"
+                direction={{ xs: 'column', md: 'row' }}
                 flexWrap="wrap"
                 justify="space-between"
+                color="gray.200"
               >
                 <Radio value="upperCase">Upper Case</Radio>
                 <Radio value="lowerCase">Lower Case</Radio>
