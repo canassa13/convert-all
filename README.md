@@ -4,6 +4,7 @@ This is a simple text conversion application, I use this repo to test things I l
 
 ####  Things I studied :nerd_face:
 - NextJs: https://nextjs.org/
+- Chakra UI: https://chakra-ui.com/
 - Design patterns
 - Clean Code
 - Jest: https://jestjs.io/
